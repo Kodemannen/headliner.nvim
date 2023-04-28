@@ -1,0 +1,14 @@
+" headline.vim
+
+" ASCII art with python:
+" https://pypi.org/project/art/
+
+function! RunArtCommand(input_text)
+  " Execute the Python command and capture the output
+  let output = systemlist('python3 -m art text "' . a:input_text . '"', getline('.'))
+
+  " Insert the output into the current buffer
+  call append(line('.') + 1, output)
+endfunction
+command! -nargs=1 Headline call RunArtCommand(expand(<q-args>))
+command! -nargs=1 Hl call RunArtCommand(expand(<q-args>))
